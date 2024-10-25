@@ -1,2 +1,4 @@
 #ignore virtual environment
 vir_env/
+#igonore json file
+*.json
