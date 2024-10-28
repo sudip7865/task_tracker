@@ -1,4 +1,8 @@
 #ignore virtual environment
 vir_env/
-#igonore json file
+#ignore pycahe
+__pycache__
+#ignore json file
 *.json
+#ignore fake.py
+fake.py
