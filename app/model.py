@@ -103,7 +103,11 @@ class Model:
 
     def list_of_task(self, status=None, date=datetime.today().date())->dict:
         '''This will return list of task of a specific 
-        date'''
+        date.
+        Status have 3 state 
+        ``0`` -> task not complete yet
+        ``1`` -> it is processing
+        ``2`` -> it had completed'''
         data=Model.all_data()
         day_data=data[str(date)]
         if status==0:
@@ -136,5 +140,10 @@ class Model:
                 except TypeError as e:
                     pass
             return done_task
-
+        #below part will remove delete part remain like
+        #{"2": ""}
+        day_data_keys=list(day_data.keys())
+        for key in day_data_keys:
+            if day_data[key]=='':
+                del day_data[key]
         return day_data
