@@ -39,7 +39,7 @@ class Test_Command(unittest.TestCase):
                     "Add command type was not int type 4th time.")
 
         #task5
-        command='t-cli add "Let it Fuck"'
+        command='t-cli add "Let it Go"'
         self.assertEqual(type(add_command(command)), type(1), msg=\
                     "Add command type was not int type 4th time.")
 

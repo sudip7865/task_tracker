@@ -1,4 +1,3 @@
-import re
 from app import process_command
 
 def call():
