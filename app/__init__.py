@@ -94,7 +94,22 @@ def list_command(command: str):
 def process_command(command: str):
     '''This will process command'''
     #This part check 't-cli' present at first or not
-    if re.match('t-cli ', command) is None:
-        print('Command:\n\t|\n\t|\n\t-->', command)
-        wrong_command()
-    return True
+    # if re.match('t-cli ', command) is None:
+    #     print('Command:\n\t|\n\t|\n\t-->', command)
+    #     wrong_command()
+    part_of_command=re.findall(r't-cli [A-Za-z]+', command)[0]
+    task_type=part_of_command.split(' ')[1]
+    match task_type:
+        case "add":
+            result=add_command(command)
+        case "update":
+            result=update_command(command)
+        case "delete":
+            result=delete_command(command)
+        case "list":
+            result=list_command(command)
+        case "mark":
+            result=mark_command(command)
+        
+    
+    # return True

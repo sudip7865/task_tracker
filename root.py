@@ -7,7 +7,7 @@ def call():
         if command == 'exit':
             print('Bye')
             break
-    # process_command(command)
+        process_command(command)
 
 if __name__=="__main__":
     call()
