@@ -58,12 +58,14 @@ def mark_command(command:str):
 
 def display_task_data( data: dict)->None:
     '''This one will display data to termainal'''
-    print('Structure of task \n "ID"\t"Task Name"\t"Status"')
-    data_keys=list(data.keys())
-    for key in data_keys:
-        row=data[key]
-        print(f'{key}.\t|| {row['task']}.\t|| {row['status']}\t||')
-
+    try:        #when json file empty it arise an keyerror 
+        print('Structure of task \n "ID"\t"Task Name"\t"Status"')
+        data_keys=list(data.keys())
+        for key in data_keys:
+            row=data[key]
+            print(f'{key}.\t|| {row['task']}.\t|| {row['status']}\t||')
+    except KeyError:
+        print('Empty database.')
 
 
 def list_command(command: str):
@@ -108,4 +110,25 @@ def process_command(command: str):
             result=mark_command(command)
         
     
-    # return True
+def execute_gui_command(id:int | None, name:str | None, status: str | None, category:int):
+    '''This function will generate command for
+    `0.Add
+    1.Update
+    2.Delete`'''
+    if category=='add':
+        command=f't-cli add "{name}"'
+    elif category=='update':
+        command=f't-cli update {id} "{name}"'
+    elif category=='delete':
+        command=f't-cli delete {id}'
+    elif category == 'mark':
+        match status.lower():
+            case 'progress':
+                command=f't-cli mark-in-progress {id}'
+            case 'completed':
+                command=f't-cli mark-done {id}'
+                
+    process_command(command)
+
+    
+

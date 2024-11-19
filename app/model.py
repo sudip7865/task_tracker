@@ -35,18 +35,34 @@ class Model:
     def get_task( task_id:int , date=datetime.today().date()):
         '''It will return only one task based on date and task_id'''
         all_data=Model.all_data()
-        return all_data[str(date)][str(task_id)]
+        try:
+            return all_data[str(date)][str(task_id)]
+        except KeyError:
+            return 
 
     def add(self, task_name:str, desc=None, callback=None, date=datetime.today().date()):
         '''This on add new task and callback was a method
         that will call after perform operation 
         '''
         data=Model.all_data()
-        day_data=data[str(date)] #{1:{}, 2:..}
+        try:
+            day_data=data[str(date)] #{1:{}, 2:..}
+        except KeyError:
+            day_data={}
         keys=list(day_data.keys())
-        last_key=keys[len(keys)-1]
-        if day_data[last_key] != {}:
-            last_key=str(int(last_key)+1)
+        try:
+            last_key=keys[len(keys)-1]
+        except IndexError:
+            last_key=1
+            data[str(date)]={}
+
+        # if last_key == -1:
+        #     last_key=1
+        try:
+            if day_data[last_key] != {}:
+                last_key=str(int(last_key)+1)
+        except KeyError:
+            pass
         new_dict={
             'task': task_name, 
             # 'description': desc,
