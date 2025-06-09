@@ -16,7 +16,7 @@ class Model:
                         }
                     }
                     }, file)
-                
+
     @staticmethod
     def all_data()->dict:
         '''This on will return all json file data into navtive python dict'''
@@ -163,3 +163,9 @@ class Model:
             if day_data[key]=='':
                 del day_data[key]
         return day_data
+
+    def number_of_tasks(self, date=datetime.today())->int:
+        '''return number of tasks for a certain date'''
+        tasks = self.list_of_task()
+        return len(list(tasks.keys()))
+        
