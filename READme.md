@@ -1,4 +1,11 @@
-# Task Tracker
+# Gui in Tack Tracker
+To aceess gui you should excute `run.py` file.
+```
+$ python3 run.py
+```
+
+
+# Task Tracker (CLI part)
 Task tracker is a CLI application. It tracks your daily life task. To store tasks data it used JSON(data.json) file instead of SQL database.
 It have five type of command:
 
