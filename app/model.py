@@ -130,20 +130,20 @@ class Model:
             not_done={}
             day_keys=list(day_data.keys())
             for i in day_keys:
-                try:
+                try:        #TypeError and KeyError arise some cases
                     if day_data[i]['status']==0:
                         not_done[i]=day_data[i]
-                except TypeError as e:
+                except Exception as e:
                     pass
             return not_done
         elif status==1: #task thoes are on processing
             process_task={}
             day_keys=list(day_data.keys())
             for i in day_keys:
-                try:        #A TypeError arise for keys like{3:''}
+                try:        #A TypeError arise for keys like{3:''}, KeyError also arise 
                     if day_data[i]['status']==1:
                         process_task[i]=day_data[i]
-                except TypeError as e:
+                except Exception as e:
                     pass
             return process_task
         elif status==2: #task thoes are done
@@ -153,7 +153,7 @@ class Model:
                 try:
                     if day_data[i]['status']==2:
                         done_task[i]=day_data[i]
-                except TypeError as e:
+                except Exception as e:
                     pass
             return done_task
         #below part will remove delete part remain like
@@ -167,5 +167,10 @@ class Model:
     def number_of_tasks(self, date=datetime.today())->int:
         '''return number of tasks for a certain date'''
         tasks = self.list_of_task()
-        return len(list(tasks.keys()))
+        length = len(list(tasks.keys()))
+        for key in list(tasks.keys()):
+            if tasks[key] == {}:
+                length -= 1
+        return length if length > 0 else 0
+
         
